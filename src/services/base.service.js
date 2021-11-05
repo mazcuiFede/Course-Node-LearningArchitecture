@@ -1,5 +1,5 @@
 class BaseService{
-    constructor({repository}){
+    constructor(repository){
         this.repository = repository
     }
     
@@ -26,8 +26,8 @@ class BaseService{
     }
 
 
-    async getAll(){
-        return await this.repository.getAll();
+    async getAll(pageNumber, pageSize){
+        return await this.repository.getAll(pageNumber, pageSize);
     }
 
     async create(entity){

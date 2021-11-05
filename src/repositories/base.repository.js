@@ -1,15 +1,17 @@
+const {PaseIntMiddleware} = require('../middlewares')
+
 class BaseRepository {
     constructor(model){
         this.model = model;
-
     }
 
     async get(id){
         return await this.model.findById(id);
     }
 
-    async getAll(){
-        return await this.model.find();
+    async getAll(pageSize = 5, pageNumber = 1){
+        const skips = pageSize * (pageNumber - 1)
+        return await this.model.find().skip(skips).limit(pageSize);
     }
 
     async create(entity){
@@ -21,7 +23,8 @@ class BaseRepository {
     }
 
     async delete(id){
-        return await this.model.findByIdAndDelte(id);
+        await this.model.findByIdAndDelete(id);
+        return true
     }
 }
 

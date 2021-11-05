@@ -6,13 +6,25 @@ const config = require("../config")
 const app = require(".")
 
 // //Services
-const { HomeService, UserService, IdeaServices, CommentService } = require('./../services')
+const { 
+    HomeService, 
+    UserService, 
+    IdeaService, 
+    CommentService,
+    AuthService
+} = require('./../services')
 
 // //Controllers
-const { HomeController } = require('../controllers')
+const { 
+    HomeController, 
+    UserController,
+    IdeaController,
+    CommentController ,
+    AuthController
+} = require('../controllers')
 
 // //Routes
-const { HomeRoutes } = require('../routes/index.routes')
+const { HomeRoutes, UserRoutes, IdeaRoutes, CommentRoutes, AuthRoutes } = require('../routes/index.routes')
 const Routes = require('../routes')
 
 //models
@@ -29,15 +41,26 @@ container
 })
 .register({
     HomeService: asClass(HomeService).singleton(),
-    IdeaServices: asClass(IdeaServices).singleton(),
+    IdeaService: asClass(IdeaService).singleton(),
     CommentService: asClass(CommentService).singleton(),
-    UserService: asClass(UserService).singleton()
+    UserService: asClass(UserService).singleton(),
+    AuthService: asClass(AuthService).singleton()
+
 })
 .register({
-    HomeController: asClass(HomeController.bind(HomeController)).singleton()
+    HomeController: asClass(HomeController.bind(HomeController)).singleton(),
+    UserController: asClass(UserController.bind(UserController)).singleton(),
+    IdeaController: asClass(IdeaController.bind(IdeaController)).singleton(),
+    CommentController: asClass(CommentController.bind(CommentController)).singleton(),
+    AuthController: asClass(AuthController.bind(AuthController)).singleton(),
+
 })
 .register({
-    HomeRoutes: asFunction(HomeRoutes).singleton()
+    HomeRoutes: asFunction(HomeRoutes).singleton(),
+    CommentRoutes: asFunction(CommentRoutes).singleton(),
+    IdeaRoutes: asFunction(IdeaRoutes).singleton(),
+    UserRoutes: asFunction(UserRoutes).singleton(),
+    AuthRoutes: asFunction(AuthRoutes).singleton()
 })
 .register({
     User: asValue(User),
